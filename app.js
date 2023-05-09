@@ -13,12 +13,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect("mongodb://localhost:27017/userDB");
 
-const userSchema  = ({
+const userSchema = new mongoose.Schema({
     email: String,
     password: String
 });
 
-
+// const secret = process.env.SOME_LONG_UNGUESSABLE_STRING;
+const secret = "Thisisourlittlesecrect";
+userSchema.plugin(encrypt, { secret: secret , encryptedFields: ["password"] });
 
 const User = new mongoose.model("User", userSchema);
 
