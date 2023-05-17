@@ -8,6 +8,8 @@ const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
+require('https').globalAgent.options.rejectUnauthorized = false;
+
 
 
 
@@ -32,6 +34,8 @@ app.use(session({
   app.use(passport.session());
 
 mongoose.connect("mongodb+srv://shashi_secret:2vFT5wo4QSVPqgM1@cluster0.2c6soxo.mongodb.net/userDB");
+
+
 
 const userSchema = new mongoose.Schema({
     email: String,
@@ -75,7 +79,7 @@ passport.serializeUser(function(user, cb) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets"
+    callbackURL: "http://localhost:3000/auth/google/secrets",
   },
   
   function(accessToken, refreshToken, profile, cb) {
