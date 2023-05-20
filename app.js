@@ -79,7 +79,7 @@ passport.serializeUser(function(user, cb) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://secrets-thv7.onrender.com/auth/google/secrets",
+    callbackURL: "https://secrets-thv7.onrender.com/auth/google/secrets"
   },
   
   function(accessToken, refreshToken, profile, cb) {
